@@ -1,0 +1,71 @@
+import mongoose from "mongoose";
+const orderSchema = new mongoose.Schema(
+  {
+    productDetails: {
+      type: Array,
+      default: [],
+    },
+    UserDetails: {
+      userId: String,
+      name: String,
+      email: String,
+      phoneNumber: String,
+    },
+
+    paymentDetails: {
+      paymentId: {
+        type: String,
+      },
+      sessionId: {
+        type: String,
+      },
+
+      payment_method_type: {
+        type: Array,
+        default: [],
+      },
+      payment_status: {
+        type: String,
+      },
+
+      transactionId: { type: String },
+      amountPaid: { type: Number },
+      currency: { type: String },
+      paidAt: { type: Date },
+      paymentStatus: { type: String, default: "Paid" },
+      paymentScreenshot: { type: String },
+    },
+    shippingAddress: {
+      addressLine1: String,
+      city: String,
+      state: String,
+      postalCode: String,
+      shippingCharge: Number,
+      countryCode: {
+        type: String,
+        default: "AU",
+      },
+    },
+    couponDetails: {
+      code: { type: String, default: null },
+      discount: { type: Number, default: 0 },
+      discountAmount: { type: Number, default: 0 },
+    },
+    totalAmount: {
+      type: Number,
+      default: 0,
+    },
+
+    orderStatus: {
+      type: [String],
+      enum: ["Cancelled", , "Processing", "Shipped", "Delivered"],
+      default: ["Processing"],
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+const orderModel = mongoose.model("order", orderSchema);
+export default orderModel;
