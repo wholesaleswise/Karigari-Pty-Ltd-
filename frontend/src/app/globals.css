@@ -27,50 +27,48 @@
 @layer utilities {
   /* Backgrounds */
   .bg-primary {
-    background-color: #ff6b00; /* Dynamic Orange */
+    background-color: #cda557;
   }
 
   .bg-secondary {
-    background-color: #fed7aa;
+    background-color: #e8c88b;
   }
 
   .bg-red {
-    background-color: #ff3d57; /* Electric Red */
+    background-color: #d9503f;
   }
 
   .bg-hover {
-    background-color: #e25700; /* Darker orange for hover */
+    background-color: #b28d45;
   }
 
   .bg-table {
-    background-color: #003c7a;
+    background-color: #3e4c5e;
   }
   .bg-hoverTable {
-    background-color: #255394;
+    background-color: #566579;
   }
   .bg-secondaryTable {
-    background-color: #e2e8f0;
+    background-color: #f2eadf;
   }
 
-  /* Borders */
   .border-card {
-    border-color: #f5d0a9; /* Soft amber border */
+    border-color: #e5cfa6;
   }
   .border-color {
-    border-color: #ff6b00; /* Soft amber border */
+    border-color: #b78939;
   }
 
-  /* Text */
   .text-primary {
-    color: #ff6b00;
+    color: #cda557;
   }
 
   .text-secondary {
-    color: #ffc107;
+    color: #d9b065;
   }
 
   .text-accent {
-    color: #ff3d57;
+    color: #d9503f;
   }
 
   .text-light {
@@ -82,29 +80,29 @@
   }
 
   .text-muted {
-    color: #6e6e6e;
+    color: #7a7063; /* Warm grey */
   }
 
   /* Hover Text */
   .text-primary:hover {
-    color: #e25700;
+    color: #b28d45;
   }
 
   .text-accent:hover {
-    color: #e6364c;
+    color: #c24436;
   }
 
-  /* Buttons (Optional quick-use) */
+  /* Buttons */
   .btn-primary {
     @apply bg-primary text-white px-4 py-2 rounded-lg hover:bg-hover transition;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-dark px-4 py-2 rounded-lg hover:bg-yellow-500 transition;
+    @apply bg-secondary text-dark px-4 py-2 rounded-lg hover:bg-[##d9b065] transition;
   }
 
   .btn-accent {
-    @apply bg-accent text-white px-4 py-2 rounded-lg hover:bg-rose-600 transition;
+    @apply bg-red text-white px-4 py-2 rounded-lg hover:bg-[#c24436] transition;
   }
 
   /* Shadows */

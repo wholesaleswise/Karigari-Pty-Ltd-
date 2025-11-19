@@ -76,7 +76,7 @@ const Footer = () => {
                 <h2 className="text-lg font-semibold text-primary uppercase">
                   Payment Methods:
                 </h2>
-                <div className="flex gap-6 items-center">
+                <div className="flex items-center">
                   {/* Stripe */}
                   <img
                     src="card.png"
@@ -93,7 +93,7 @@ const Footer = () => {
                   <img
                     src="/qr.png"
                     alt="QR Payment"
-                    className="h-8 w-8 object-contain rounded-md border border-gray-500"
+                    className="h-8 w-8 object-contain rounded-md border bg-white border-gray-500"
                   />
                 </div>
               </div>

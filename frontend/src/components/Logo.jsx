@@ -31,7 +31,10 @@ export default function Info({ className = "h-10", isShow = false }) {
         ) : null}
 
         {(!logoImage || isShow) && (
-          <span className="capitalize text-sm md:text-base xl:text-lg font-bold tracking-tight font-sans bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent ">
+          <span
+            className="capitalize text-sm md:text-base xl:text-lg font-bold tracking-tight font-sans bg-gradient-to-r from-[#d9503f] via-[#cda557] to-[#e8c88b]
+ bg-clip-text text-transparent "
+          >
             {websiteName}
           </span>
         )}

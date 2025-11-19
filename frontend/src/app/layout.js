@@ -17,7 +17,7 @@ export async function generateMetadata() {
     description: "Browse our tech gear and gadgets.",
     keywords: websiteInfo?.keywords,
     icons: {
-      icon: websiteInfo?.logoImage,
+      icon: websiteInfo?.logoImage || null,
     },
     openGraph: {
       title: websiteInfo?.websiteName,
