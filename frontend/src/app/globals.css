@@ -27,7 +27,7 @@
 @layer utilities {
   /* Backgrounds */
   .bg-primary {
-    background-color: #cda557;
+    background-color: #b28d45;
   }
 
   .bg-secondary {
@@ -39,7 +39,7 @@
   }
 
   .bg-hover {
-    background-color: #b28d45;
+    background-color: #cda557;
   }
 
   .bg-table {
@@ -60,7 +60,7 @@
   }
 
   .text-primary {
-    color: #cda557;
+    color: #b28d45;
   }
 
   .text-secondary {
@@ -85,7 +85,7 @@
 
   /* Hover Text */
   .text-primary:hover {
-    color: #b28d45;
+    color: #cda557;
   }
 
   .text-accent:hover {

@@ -6,7 +6,7 @@ const CategoryCard = ({ category }) => {
   return (
     <>
       <>
-        <div className="w-[75px] h-[75px] md:w-20 md:h-20 rounded-full overflow-hidden sm:p-4 p-4 bg-secondary flex items-center justify-center mb-4">
+        <div className="w-[75px] h-[75px] md:w-20 md:h-20 rounded-full overflow-hidden sm:p-4 p-4 bg-primary flex items-center justify-center mb-4">
           <img
             src={category.categoryImage}
             alt={category.categoryName}
@@ -14,7 +14,7 @@ const CategoryCard = ({ category }) => {
           />
         </div>
 
-        <p className="text-sm  md:text-base capitalize text-center text-primary  hover:text-hover">
+        <p className="text-sm  md:text-base capitalize text-center">
           {category.categoryName}
         </p>
       </>

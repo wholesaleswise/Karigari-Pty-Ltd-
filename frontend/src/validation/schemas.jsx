@@ -231,7 +231,12 @@ export const checkoutValidationSchema = Yup.object({
     .nullable()
     .when("paymentMethod", {
       is: (val) => val === "qr",
-      then: (schema) => schema.required("Payment screenshot is required"),
+      then: (schema) =>
+        schema
+          .required("Payment screenshot is required")
+          .test("is-file", "Payment screenshot is required", (value) => {
+            return value instanceof File;
+          }),
       otherwise: (schema) => schema.notRequired(),
     }),
 });

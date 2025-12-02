@@ -30,7 +30,7 @@ export function HomePageBanner() {
   if (isLoading) {
     return (
       <div className="container mx-auto p-4 h-72">
-        <div className="w-full h-full bg-red-200 rounded-md animate-pulse flex justify-center items-center">
+        <div className="w-full h-full bg-primary rounded-md animate-pulse flex justify-center items-center">
           <img src="/loader.gif" width={50} height={50} alt="Loading..." />
         </div>
       </div>
@@ -75,20 +75,19 @@ export function HomePageBanner() {
             pagination={{ clickable: true }}
             loop={true}
             autoplay={{ delay: 4000, disableOnInteraction: false }}
-            className="rounded-lg overflow-hidden h-[180px] sm:h-[180px] md:h-[250px] lg:h-[300px] xl:h-[300px] "
+            className="rounded-lg overflow-hidden h-[180px] sm:h-[180px] md:h-[250px] lg:h-[350px] xl:h-[400px] "
           >
             {bannerData.map((banner, idx) => (
               <SwiperSlide key={idx}>
                 <Link
                   href={banner.productLink || "/products"}
-                  className="relative block h-[150px] sm:h-[160px] md:h-[200px] lg:h-[300px] xl:h-[300px]  bg-center bg-contain 2xl:bg-cover bg-no-repeat"
+                  className="relative block h-[160px] sm:h-[160px] md:h-[250px] lg:h-[350px] xl:h-[400px]  bg-center bg-contain 2xl:bg-cover bg-no-repeat"
                   style={{ backgroundImage: `url(${banner.BannerImage})` }}
                   aria-label="Banner Link"
                 />
               </SwiperSlide>
             ))}
           </Swiper>
-          
         </>
       ) : (
         <div className="min-h-[60vh] flex justify-center items-center text-red-500 font-semibold">

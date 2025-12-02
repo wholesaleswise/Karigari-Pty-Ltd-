@@ -932,11 +932,20 @@ const Checkout = () => {
                                     const file =
                                       e.currentTarget.files?.[0] || null;
                                     if (file) {
-                                      console.log("Selected file:", file);
-                                      formik.setFieldValue(
-                                        "paymentScreenshot",
-                                        file
-                                      );
+                                      // formik.setFieldValue(
+                                      //   "paymentScreenshot",
+                                      //   file
+                                      // );
+                                      formik
+                                        .setFieldValue(
+                                          "paymentScreenshot",
+                                          file
+                                        )
+                                        .then(() => {
+                                          formik.validateField(
+                                            "paymentScreenshot"
+                                          );
+                                        });
                                       formik.setFieldTouched(
                                         "paymentScreenshot",
                                         true

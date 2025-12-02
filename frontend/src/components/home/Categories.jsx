@@ -46,8 +46,8 @@ const Categories = () => {
           <div className="flex -mx-2 mt-4 sm:mt-8">
             {categoryLoading.map((_, index) => (
               <div key={index} className="px-2">
-                <div className="h-16 w-16 md:w-20 md:h-20 rounded-full bg-red-200 animate-pulse"></div>
-                <p className="h-5 w-16 md:w-20 md:h-7 mt-5 rounded-md bg-red-200 animate-pulse"></p>
+                <div className="h-16 w-16 md:w-20 md:h-20 rounded-full bg-primary animate-pulse"></div>
+                <p className="h-5 w-16 md:w-20 md:h-7 mt-5 rounded-md bg-primary animate-pulse"></p>
               </div>
             ))}
           </div>
