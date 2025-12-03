@@ -161,7 +161,7 @@ const MyOrderCom = ({ data }) => {
                       href={`/admin/my-order/${order?._id}`}
                       className="text-blue-600"
                     >
-                      {order?._id}
+                      {order?.orderId}
                     </Link>
                   </TableCell>
                   <TableCell className="max-w-md">

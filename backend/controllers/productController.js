@@ -130,7 +130,6 @@ class ProductController {
         product,
       });
     } catch (error) {
-      console.log(error);
       res.status(500).send({
         success: false,
         message: error.message || "Error in creating product",
@@ -150,7 +149,6 @@ class ProductController {
         products,
       });
     } catch (error) {
-      console.log(error);
       res.status(500).send({
         success: false,
         message: error.message || "Error in fetching products",
@@ -163,7 +161,7 @@ class ProductController {
   static getSingleProduct = async (req, res) => {
     try {
       const { slug } = req.params;
-      console.log(slug);
+
       const product = await ProductModel.findOne({ slug: slug })
         .populate("category")
         .populate({
@@ -186,7 +184,6 @@ class ProductController {
         product,
       });
     } catch (error) {
-      console.log(error);
       res.status(500).send({
         success: false,
         message: error.message || "Error while getting product",
@@ -311,7 +308,7 @@ class ProductController {
       }
 
       const newImageUrlstosave = [...result, ...imageUrls];
-      console.log(newImageUrlstosave);
+
       const updatedImageUrls = oldImage
         ? [...newImageUrlstosave]
         : [...imageUrls];
@@ -320,11 +317,7 @@ class ProductController {
 
       if (productPrice != product.productPrice) {
         gpsPrice = parseFloat((productPrice * 1.1).toFixed(2));
-        console.log(`Original price updated. New GPS price: ${gpsPrice}`);
-      } else {
-        console.log("Price unchanged. Skipping GPS update.");
       }
-
       const updateData = {
         productName,
         productDescription,
@@ -387,7 +380,6 @@ class ProductController {
 
       // Delete the product from the database
       const result = await ProductModel.findByIdAndDelete(id);
-      console.log(result);
 
       res.status(200).send({
         success: true,
@@ -405,7 +397,6 @@ class ProductController {
   static createProductReview = async (req, res) => {
     const { rating, reviewContent, reviewerName, userId } = req.body;
     const { slug } = req.params;
-    console.log(rating, slug, reviewContent, reviewerName, userId);
 
     try {
       // Validation
@@ -462,26 +453,24 @@ class ProductController {
         0
       );
       const avgRating = numReviews > 0 ? Math.floor(ratingSum / numReviews) : 0;
-      console.log(avgRating);
 
       // Update the product with the new average rating and number of reviews
       const updatedProduct = await ProductModel.findOneAndUpdate(
         { slug },
         {
           $set: {
-            rating: avgRating, // Set the new average rating
-            numReviews: numReviews, // Set the new number of reviews
+            rating: avgRating,
+            numReviews: numReviews,
           },
-          $push: { review: newReview }, // Add the new review reference
+          $push: { review: newReview },
         },
         { new: true }
       );
 
-      // Send the response
       res.status(200).send({
         success: true,
         message: "Review added successfully",
-        product: updatedProduct, // Optionally return the updated product
+        product: updatedProduct,
       });
     } catch (error) {
       console.error(error);
@@ -515,10 +504,7 @@ class ProductController {
 
   static updateProductReview = async (req, res) => {
     const { rating, reviewContent, userId } = req.body;
-    const { slug, reviewId } = req.params; // Assuming reviewId is passed as a parameter
-    // Assuming userId is passed from the authenticated user's session
-
-    console.log(rating, slug, reviewContent, reviewId, userId);
+    const { slug, reviewId } = req.params;
 
     try {
       // Validation
@@ -571,7 +557,6 @@ class ProductController {
         0
       );
       const avgRating = numReviews > 0 ? Math.floor(ratingSum / numReviews) : 0;
-      console.log(avgRating);
 
       const updatedProduct = await ProductModel.findOneAndUpdate(
         { slug },
@@ -624,7 +609,6 @@ class ProductController {
   static deleteProductReview = async (req, res) => {
     const userId = req.user._id;
     const { slug, reviewId } = req.params;
-    console.log(slug, reviewId, userId);
 
     try {
       // Check if the product exists

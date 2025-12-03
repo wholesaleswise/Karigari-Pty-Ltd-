@@ -37,7 +37,6 @@ const AllCategory = () => {
   useEffect(() => {
     if (categoryData?.categories || isSuccess) {
       setCategories(categoryData.categories);
-      console.log(categoryData);
     } else if (isError) {
       toast.error(`${getCategoryStatus?.error?.data?.message}..`);
     }

@@ -123,7 +123,7 @@ const Cart = () => {
 
   const handleRemoveItem = async (id) => {
     const response = await deleteCartItem({ productId: id });
-    console.log(response);
+
     if (response.data) {
       toast.success(`${response?.data?.message}`);
     } else {
@@ -133,7 +133,7 @@ const Cart = () => {
 
   const handleRemoveAllItem = async () => {
     const response = await deleteCartAllItem();
-    console.log(response);
+
     if (response.data) {
       toast.success(`${response?.data?.message}`);
     } else {
@@ -144,7 +144,7 @@ const Cart = () => {
   const handleUpdateQuantity = async (id, quantity) => {
     if (quantity > 0) {
       const response = await updateCartItem({ productId: id, quantity });
-      console.log(response?.error?.data);
+
       if (response.error) {
         toast.error(`${response?.error?.data?.message}`);
       }

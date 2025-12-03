@@ -137,7 +137,7 @@ const WebsiteBanner = ({ bannerIdToUpdate }) => {
       </div>
     );
   }
-  console.log(formik.values);
+
   return (
     <div className="container mx-auto p-6 pt-0">
       <div className="py-6">

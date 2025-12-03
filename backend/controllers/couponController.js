@@ -141,7 +141,7 @@ class CouponController {
         "UserDetails.userId": userId.toString(),
         "couponDetails.code": code,
       });
-      console.log(totalUsedCount, userUsedCount);
+
       if (
         coupon.maxUsesPerUser !== null &&
         userUsedCount >= coupon.maxUsesPerUser

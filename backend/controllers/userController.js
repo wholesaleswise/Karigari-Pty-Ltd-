@@ -311,8 +311,7 @@ class UserController {
           subject: "Password Reset Link",
           html: `<p>Hello ${user.name},</p><p>Please <a href="${resetLink}">click here</a> to reset your password.</p>`,
         });
-        // Send success response
-        console.log(mail);
+
         res.status(200).json({
           status: "success",
           message: "Password reset email sent. Please check your email.",

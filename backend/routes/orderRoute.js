@@ -29,5 +29,9 @@ router.use(isAdmin);
 
 router.get("/all-orders", orderController.getAllOrderController);
 router.patch("/order-status/:orderId", orderController.updateOrderStatus);
+router.patch(
+  "/update-payment/:orderId",
+  orderController.updateOrderPaymentStatus
+);
 
 export default router;

@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema(
   {
+    orderId: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+
     productDetails: {
       type: Array,
       default: [],
@@ -27,12 +33,9 @@ const orderSchema = new mongoose.Schema(
       payment_status: {
         type: String,
       },
-
-      transactionId: { type: String },
       amountPaid: { type: Number },
-      currency: { type: String },
+      remainingAmount: { type: String },
       paidAt: { type: Date },
-      paymentStatus: { type: String, default: "Paid" },
       paymentScreenshot: { type: String },
     },
     shippingAddress: {
@@ -58,7 +61,7 @@ const orderSchema = new mongoose.Schema(
 
     orderStatus: {
       type: [String],
-      enum: ["Cancelled", , "Processing", "Shipped", "Delivered"],
+      enum: ["Cancelled", "Processing", "Shipped", "Delivered"],
       default: ["Processing"],
     },
   },

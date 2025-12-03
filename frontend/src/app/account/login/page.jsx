@@ -49,7 +49,7 @@ const Login = () => {
           toast.error(`${response?.error?.data?.message}...`);
         }
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     },
   });

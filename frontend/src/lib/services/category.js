@@ -9,7 +9,6 @@ export const categoryApi = createApi({
   endpoints: (builder) => ({
     createCategory: builder.mutation({
       query: (formData) => {
-        console.log(formData);
         return {
           url: "/category",
           method: "POST",
@@ -58,7 +57,6 @@ export const categoryApi = createApi({
 
     deleteCategory: builder.mutation({
       query: (id) => {
-        console.log(id);
         return {
           url: `/category/${id}`,
           method: "DELETE",

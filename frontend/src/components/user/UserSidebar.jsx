@@ -46,7 +46,7 @@ export function UserSidebar({ ...props }) {
         window.location.reload();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const className = "h-10 w-auto object-cover";

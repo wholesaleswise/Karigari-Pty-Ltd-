@@ -21,7 +21,6 @@ export const websiteInfoApi = createApi({
     // Add a Info
     addInfo: builder.mutation({
       query: (formData) => {
-        console.log(formData);
         return {
           url: "/website-info",
           method: "POST",

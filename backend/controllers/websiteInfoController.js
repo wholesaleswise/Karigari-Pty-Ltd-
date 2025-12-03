@@ -75,7 +75,7 @@ class WebsiteInfoController {
   static getInfo = async (req, res) => {
     try {
       const info = await WebsiteInfoModel.findOne();
-      console.log(info);
+
       if (!info) {
         return res.status(404).send({
           success: false,

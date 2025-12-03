@@ -23,12 +23,6 @@ const generateTokens = async (user) => {
       userId: user?._id,
     });
 
-    if (deletedToken) {
-      console.log(`Deleted refresh token for user ${user._id}`);
-    } else {
-      console.log(`No refresh token found for user ${user._id}`);
-    }
-
     // Save New Refresh Token
     await new UserRefreshTokenModel({
       userId: user?._id,

@@ -162,7 +162,7 @@ export default function ProductForm({ slug }) {
         formData.append("discount", productData.discount);
         formData.append("keywords", productData.keywords);
         formData.append("productImageDBUrls", [...digitalOceanUrls]);
-        console.log(digitalOceanUrls);
+
         formData.append(
           "productTotalStockQty",
           productData.productTotalStockQty
@@ -174,7 +174,6 @@ export default function ProductForm({ slug }) {
           });
         }
 
-        console.log("Form Data Before Submit:", productData);
         if (productId) {
           const response = await updateProduct({ id: productId, formData });
           if (updateSuccess || response?.data) {
@@ -184,7 +183,6 @@ export default function ProductForm({ slug }) {
           } else if (updateError) {
             toast.error(`${updateErrorDetails?.data?.message}..`);
           }
-          console.log(formData);
         } else {
           const response = await createProduct(formData);
           if (createSuccess || response?.data) {

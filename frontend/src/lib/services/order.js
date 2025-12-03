@@ -138,6 +138,18 @@ export const orderApi = createApi({
       },
       invalidatesTags: ["Orders"],
     }),
+    updateOrderPaymentStatus: builder.mutation({
+      query: ({ id, amountPaid, status }) => {
+        return {
+          url: `/update-payment/${id}`,
+          method: "PATCH",
+          body: { amountPaid, status }, // send correct fields
+          headers: {},
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["Orders"],
+    }),
   }),
 });
 
@@ -148,6 +160,7 @@ export const {
   useAddToOrderStripeMutation,
   useGetsingleOrderQuery,
   useGetMyOrderQuery,
+  useUpdateOrderPaymentStatusMutation,
   useUpdateOrderStatusMutation,
   useGetOrderBySessionQuery,
   useAddToOrderCODMutation,

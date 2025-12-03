@@ -254,7 +254,7 @@ const SingleProduct = ({ slug }) => {
     },
     [deleteError, deleteSuccess, deleteReview, router, user]
   );
-  console.log(rating);
+
   const handleSubmitReview = useCallback(
     async (e) => {
       e.preventDefault();

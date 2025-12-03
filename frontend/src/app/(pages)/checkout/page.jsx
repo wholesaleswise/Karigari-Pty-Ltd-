@@ -91,8 +91,8 @@ const SelectedItem = ({ item }) => {
 const Checkout = () => {
   const { data, isSuccess, error: fetchError } = useGetUserQuery();
   const [addToOrderStripe] = useAddToOrderStripeMutation();
-  const [addToOrderCOD] = useAddToOrderCODMutation();
-  const [addToOrderQR] = useAddToOrderQRMutation();
+  const [addToOrderCOD, { isLoading: codLoading }] = useAddToOrderCODMutation();
+  const [addToOrderQR, { isLoading: qrLoading }] = useAddToOrderQRMutation();
   const { data: response, isLoading: addressLoading } =
     useGetAllAddressesQuery();
   const [applyCoupon, { isLoading: applying }] = useApplyCouponMutation();
@@ -105,7 +105,6 @@ const Checkout = () => {
   const [couponCode, setCouponCode] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [couponError, setCouponError] = useState("");
-
   useEffect(() => {
     if (data && isSuccess) {
       setUser(data.user);
@@ -172,6 +171,14 @@ const Checkout = () => {
     },
     validationSchema: checkoutValidationSchema,
     onSubmit: async (values) => {
+      const handleSuccessRedirect = () => {
+        if (userRole === "admin") {
+          router.push("/admin/my-order");
+        } else if (userRole === "user") {
+          router.push("/user/order");
+        }
+      };
+
       if (values.paymentMethod === "stripe") {
         if (total < 150) {
           toast.error("At least AU$150 is required to proceed.");
@@ -185,9 +192,7 @@ const Checkout = () => {
         try {
           const res = await addToOrderStripe(values);
 
-          console.log("Stripe session response:", res);
-
-          const sessionId = res?.error?.data?.id;
+          const sessionId = res?.data?.id || res?.error?.data?.id;
           if (sessionId) {
             await stripePromise.redirectToCheckout({ sessionId });
           } else {
@@ -208,23 +213,26 @@ const Checkout = () => {
 
         try {
           const res = await addToOrderQR(values);
-          console.log("res", res);
+
           if (res?.data) {
-            toast.success(res?.data?.message);
+            toast.success(res.data.message);
+            handleSuccessRedirect();
           } else {
             toast.error(res?.error?.data?.message);
           }
         } catch (error) {
-          console.log("error", error);
+          console.error("QR order error:", error);
           toast.error(error?.response?.data?.message);
         }
       } else if (values.paymentMethod === "cod") {
         try {
           const res = await addToOrderCOD(values);
-          console.log("COD order response:", res);
-          toast.success(`${res?.data?.message}`);
+
+          if (res?.data) {
+            toast.success(res.data.message);
+            handleSuccessRedirect();
+          }
         } catch (error) {
-          console.error("COD order error:", error);
           toast.error(error?.response?.data?.message);
         }
       } else {
@@ -232,9 +240,7 @@ const Checkout = () => {
       }
     },
   });
-  useEffect(() => {
-    console.log("Formik paymentScreenshot:", formik.values.paymentScreenshot);
-  }, [formik.values.paymentScreenshot]);
+
   const handleApplyCoupon = async () => {
     if (!couponCode.trim()) {
       setCouponError("Please enter a coupon code");
@@ -283,9 +289,6 @@ const Checkout = () => {
     Number(discountAmount) +
     Number(shipping)
   ).toFixed(2);
-  useEffect(() => {
-    console.log("Formik errors:", formik.errors);
-  }, [formik.errors]);
 
   return (
     <div className=" w-full container mx-auto md:p-4 py-8">
@@ -1150,7 +1153,9 @@ const Checkout = () => {
                       !formik.values.fullName ||
                       !formik.values.phone ||
                       !formik.values.state ||
-                      !formik.values.zip
+                      !formik.values.zip ||
+                      qrLoading ||
+                      codLoading
                     }
                   >
                     Complete Purchase

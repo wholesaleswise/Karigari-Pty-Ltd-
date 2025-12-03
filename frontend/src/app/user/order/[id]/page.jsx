@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import OrderDetailsCom from "@/components/OrderDetailsCom";
 
 const OrderDetails = ({ id }) => {
-  console.log(id);
   const [order, setOrder] = useState(null);
   const { data, isSuccess, error } = useGetsingleOrderQuery(id);
   const router = useRouter();

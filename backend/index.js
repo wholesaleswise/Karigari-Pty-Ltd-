@@ -65,8 +65,6 @@ cron.schedule("0 * * * *", async () => {
     const result = await CartModel.deleteMany({
       addedAt: { $lt: oneMonthAgo },
     });
-
-    console.log(`Deleted ${result.deletedCount} cart items older than 1 month`);
   } catch (error) {
     console.error("Error deleting cart items:", error);
   }

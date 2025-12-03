@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Download } from "lucide-react";
 import * as html2pdf from "html2pdf.js";
 import Loading from "./Loading";
@@ -9,6 +9,7 @@ import { useGetInfoQuery } from "@/lib/services/websiteInfo";
 const OrderDetailsCom = ({ order, id }) => {
   const componentRef = useRef();
   const { data: websiteInfo } = useGetInfoQuery();
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!order) {
     return (
@@ -27,6 +28,7 @@ const OrderDetailsCom = ({ order, id }) => {
     createdAt,
     orderStatus,
     couponDetails = {},
+    orderId,
   } = order;
 
   const shippingCharge = shippingAddress.shippingCharge;
@@ -77,7 +79,9 @@ const OrderDetailsCom = ({ order, id }) => {
       >
         <header className="flex flex-col md:flex-row md:justify-between gap-4 pb-6 border-b border-gray-200">
           <div>
-            <h1 className="text-lg md:text-xl font-semibold">Bill No: {id}</h1>
+            <h1 className="text-lg md:text-xl font-semibold">
+              Bill No: {orderId}
+            </h1>
             <p className="text-sm">
               Issued on {new Date(createdAt).toLocaleDateString()}
             </p>
@@ -172,6 +176,71 @@ const OrderDetailsCom = ({ order, id }) => {
                   </span>
                 </p>
               )}
+              {paymentDetails?.amountPaid > 0 && (
+                <p>
+                  Paid Amount:{" "}
+                  <span className="ml-1 font-semibold text-indigo-600">
+                    {paymentDetails?.amountPaid}
+                  </span>
+                </p>
+              )}
+              {paymentDetails?.remainingAmount && (
+                <p>
+                  RemainingAmount:{" "}
+                  <span className="ml-1 font-semibold text-indigo-600">
+                    {paymentDetails?.remainingAmount}
+                  </span>
+                </p>
+              )}
+              {paymentDetails?.paidAt && (
+                <p>
+                  Initial Payment Date:{" "}
+                  <span className="ml-1 font-semibold">
+                    {paymentDetails?.paidAt}
+                  </span>
+                </p>
+              )}
+              {paymentDetails?.paymentScreenshot && (
+                <div className="flex items-center gap-3 mt-2">
+                  <span>Payment:</span>
+
+                  <img
+                    onClick={() => setIsOpen(true)}
+                    className="h-[50px] w-[50px] cursor-pointer object-contain rounded-lg border"
+                    src={paymentDetails?.paymentScreenshot}
+                    alt="Payment Screenshot"
+                  />
+
+                  <span
+                    className="text-xs text-blue-600 cursor-pointer"
+                    onClick={() => setIsOpen(true)}
+                  >
+                    View Full
+                  </span>
+                </div>
+              )}
+
+              {isOpen && (
+                <div
+                  className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div className="relative">
+                    <img
+                      src={paymentDetails?.paymentScreenshot}
+                      alt="Full Payment Screenshot"
+                      className="max-h-[90vh] max-w-[90vw] rounded-lg"
+                    />
+
+                    <button
+                      onClick={() => setIsOpen(false)}
+                      className="absolute -top-4 -right-4 bg-white text-black rounded-full w-8 h-8 flex items-center justify-center font-bold shadow"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -188,7 +257,9 @@ const OrderDetailsCom = ({ order, id }) => {
                   {productDetails.some((p) => p.productId?.discount > 0) && (
                     <th className="px-4 py-3 font-semibold">Discount</th>
                   )}
-                  <th className="px-4 py-3 font-semibold">Total  (with discount)</th>
+                  <th className="px-4 py-3 font-semibold">
+                    Total (with discount)
+                  </th>
                 </tr>
               </thead>
               <tbody>

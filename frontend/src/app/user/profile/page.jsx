@@ -44,7 +44,6 @@ const Profile = () => {
           toast.error(response?.error?.data?.message);
         }
       } catch (error) {
-        console.log("error");
         toast.error(error.response?.error?.data?.message);
       }
     },

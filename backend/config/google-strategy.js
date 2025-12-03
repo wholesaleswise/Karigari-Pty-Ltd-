@@ -12,11 +12,10 @@ passport.use(
       callbackURL: process.env.GOOGLE_REDIRECT_URI,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log("Profile", profile);
       try {
         // Check if user already exists in the database
         let user = await UserModel.findOne({ email: profile._json.email });
-        // console.log("profile", profile);
+
         if (!user) {
           const lastSixDigitsID = profile.id.substring(profile.id.length - 6);
           const lastTwoDigitsName = profile._json.name.substring(

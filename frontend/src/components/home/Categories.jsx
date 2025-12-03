@@ -25,7 +25,6 @@ const Categories = () => {
           Array.isArray(category.products) && category?.products?.length > 0
       );
       setCategories(filteredCategories);
-      console.log("filteredCategories", filteredCategories);
     } else if (isError) {
       toast.error(`${getCategoryStatus?.error?.data?.message}..`);
     }

@@ -37,7 +37,6 @@ const VerifyEmail = () => {
           toast.error(`${response?.error?.data?.message}...`);
         }
       } catch (error) {
-        console.log(error);
         toast.error("Error verifying OPT");
       }
     },

@@ -49,7 +49,6 @@ const CategoryList = () => {
   useEffect(() => {
     if (categoryData?.categories || isSuccess) {
       setCategories(categoryData.categories);
-      console.log(categoryData);
     } else if (isError) {
       toast.error(`${getCategoryStatus?.error?.data?.error}..`);
     }
@@ -73,10 +72,9 @@ const CategoryList = () => {
   const totalPages = Math.ceil(categories.length / categoriesPerPage);
 
   const handleDelete = async (id) => {
-    console.log(id);
     try {
       const response = await deleteCategory(id);
-      console.log(response);
+
       if (response?.data || status?.isSuccess) {
         toast.success(`${response?.data?.message}!!!`);
       } else if (status?.isError || response?.error) {

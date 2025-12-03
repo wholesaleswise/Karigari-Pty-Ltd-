@@ -250,13 +250,12 @@ const Navbar = () => {
         window.location.reload();
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
   // Handle suggestion click (navigate to product page)
   const handleSuggestionClick = (slug) => {
-    console.log("click", slug);
     router.push(`/product/${slug}`);
     setShowSuggestions(false);
     setSearch("");

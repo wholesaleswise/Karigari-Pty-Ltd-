@@ -36,7 +36,7 @@ const Address = () => {
       setAddress(addresses?.addresses);
     }
   }, [addresses]);
-  console.log(addresses?.addresses);
+
   const [
     addAddress,
     {
